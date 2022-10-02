@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class ItemController : Interactible
 {
-    public override void Use() {
-        
+    public Item item;
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player")) {
+            InventoryManager.instance.AddItem(item);
+            Destroy(gameObject);
+        }
     }
 }

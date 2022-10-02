@@ -24,6 +24,11 @@ public class InventoryManager : MonoBehaviour
     public bool HasItem(Item item) {
         return items.Contains(item);
     }
+    public void UseItem(Item item) {
+        RemoveItem(item);
+        HealthBar.instance.addHealth(item.healthRestore);
+        ListItems();
+    }
     public void ToggleInventory() {
         SetInventory(!canvas.activeSelf);
     }
@@ -36,6 +41,9 @@ public class InventoryManager : MonoBehaviour
             var itemName = obj.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
             itemName.SetText(item.itemName);
             var itemIcon = obj.transform.Find("Icon").GetComponent<Image>();
+            Button button = obj.GetComponent<Button>();
+            print(button);
+            button.onClick.AddListener(delegate { UseItem(item); });
             itemIcon.sprite = item.sprite;
         }
     }

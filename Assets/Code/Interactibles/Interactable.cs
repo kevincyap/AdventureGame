@@ -15,7 +15,8 @@ public class Interactible : MonoBehaviour
         
     }
 
-    public virtual void Use() {
+    protected virtual void OnTriggerEnter(Collider other)
+    {
         
     }
 }

@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PublicVars.paused) {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.A)) {
             prevAction = "Attack";
         } else if (Input.GetMouseButtonDown(0)) {
