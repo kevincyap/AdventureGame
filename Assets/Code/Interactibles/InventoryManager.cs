@@ -27,11 +27,12 @@ public class InventoryManager : MonoBehaviour
         return items.Contains(item);
     }
     public void UseItem(Item item) {
-        RemoveItem(item);
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        ItemController.UseItem(item, playerObj);
-        ItemDesc.SetActive(false);
-        DialogController.instance.UseItem();
+        if (ItemController.UseItem(item, playerObj)) {
+            RemoveItem(item);
+            ItemDesc.SetActive(false);
+            DialogController.instance.UseItem();
+        }
     }
     public void DiscardItem(Item item) {
         RemoveItem(item);

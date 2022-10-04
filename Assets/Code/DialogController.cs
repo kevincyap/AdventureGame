@@ -41,9 +41,11 @@ public class DialogController : MonoBehaviour
     }
 
     public void DisplayMessage(string message) {
+        canvas.SetActive(true);
+        enemyHealthBar.gameObject.SetActive(false);
         SetText(message);
         SetButtons(false);
-        StartCoroutine(WaitAndClose(1f));
+        StartCoroutine(WaitAndClose(2f));
     }
 
     public void StartEncounter(EnemyController enemy) {
