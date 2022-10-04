@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: small_potion
   itemName: Small Potion
-  sprite: {fileID: 0}
+  itemDesc: A small red vial that can heal small injuries in its user.
+  sprite: {fileID: 21300000, guid: 59bdce9cf5453ac49b504f0cdd3ab327, type: 3}
   healthRestore: 10

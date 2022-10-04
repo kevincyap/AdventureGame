@@ -5,6 +5,7 @@ public class Item : ScriptableObject
 {
     public string ID;
     public string itemName;
+    public string itemDesc;
     public Sprite sprite;
     public int healthRestore;
     //public AudioClip audioClip;
