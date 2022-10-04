@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     public Camera cam;
     NavMeshAgent agent;
-    string prevAction;
     void Start() {
         agent = GetComponent<NavMeshAgent>();
     }
@@ -18,22 +17,17 @@ public class PlayerController : MonoBehaviour
         if (PublicVars.paused) {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.A)) {
-            prevAction = "Attack";
-        } else if (Input.GetMouseButtonDown(0)) {
+
+        if (Input.GetMouseButtonDown(0)) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
-                if (hit.transform.gameObject.CompareTag("Enemy") && prevAction == "Attack") {
-                    print("attack");
-                    Destroy(hit.transform.gameObject);
-                    agent.isStopped = true;
-                } else {
-                    agent.isStopped = false;
-                    agent.SetDestination(hit.point);
-                }
-                prevAction = "";
+                agent.isStopped = false;
+                agent.SetDestination(hit.point);
             }
         }
+    }
+    public void StopPlayer() {
+        agent.SetDestination(transform.position);
     }
 }

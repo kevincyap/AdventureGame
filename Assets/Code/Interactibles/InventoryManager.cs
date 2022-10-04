@@ -27,9 +27,12 @@ public class InventoryManager : MonoBehaviour
         return items.Contains(item);
     }
     public void UseItem(Item item) {
-        RemoveItem(item);
-        HealthBar.instance.addHealth(item.healthRestore);
-        ItemDesc.SetActive(false);
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (ItemController.UseItem(item, playerObj)) {
+            RemoveItem(item);
+            ItemDesc.SetActive(false);
+            DialogController.instance.UseItem();
+        }
     }
     public void DiscardItem(Item item) {
         RemoveItem(item);
@@ -76,6 +79,9 @@ public class InventoryManager : MonoBehaviour
         if (val && SceneController.instance.pauseMenu.activeSelf) {
             return;
         }
+        if (val) {
+            ListItems();
+        }
         Inventory.SetActive(val);
         ItemDesc.SetActive(false);
         SceneController.instance.SetPause(val);
@@ -83,8 +89,10 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (DialogController.instance.InEncounter) {
+            return;
+        }
         if(Input.GetKeyDown(KeyCode.E) && !ItemDesc.activeSelf) {
-            ListItems();
             ToggleInventory();
         } else if (Input.GetKeyDown(KeyCode.Escape)) {
             if (ItemDesc.activeSelf) {
