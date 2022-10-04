@@ -12,4 +12,9 @@ public class ItemController : Interactible
             Destroy(gameObject);
         }
     }
+    public static void UseItem(Item item, GameObject user) {
+        if (item.type == ItemType.Health) {
+            HealthBar.instance.AddHealth(item.data);
+        }
+    }
 }
