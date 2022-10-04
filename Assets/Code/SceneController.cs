@@ -17,7 +17,7 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
     public void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) //If the player presses the escape key
+        if (Input.GetKeyDown(KeyCode.Escape) && !InventoryManager.instance.Inventory.activeSelf) //If the player presses the escape key
         {
             SetPauseMenu(!PublicVars.paused);
         }

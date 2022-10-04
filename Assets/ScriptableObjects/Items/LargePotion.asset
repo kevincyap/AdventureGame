@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: large_potion
   itemName: Large Potion
+  itemDesc: A larger red vial that can heal significant injuries of its user.
   sprite: {fileID: 0}
   healthRestore: 50
