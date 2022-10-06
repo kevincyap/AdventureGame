@@ -10,6 +10,7 @@ public class DoorMechanism : MonoBehaviour
     private LayerMask ItemMask;
     public Item key;
     public bool locked = false;
+    private bool isOpen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class DoorMechanism : MonoBehaviour
 
     public bool Open() {
         animator.SetBool("wantToOpen", true);
+        isOpen = true;
         navMeshObstacle.SetActive(false);
         if (locked) {
             locked = false;
@@ -32,7 +34,7 @@ public class DoorMechanism : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Player") {
+        if (other.gameObject.tag == "Player" && !isOpen) {
             if (key != null && locked) {
                 if (InventoryManager.instance.HasItem(key)) {
                     DialogController.instance.DisplayMessage("The door opens as the key crumbles into a pile of rust.");
@@ -40,6 +42,7 @@ public class DoorMechanism : MonoBehaviour
                     Open();
                 }
             } else {
+                DialogController.instance.DisplayMessage("This door is not locked. You push the door and enter a room.");
                 Open();
             } 
         }

@@ -8,8 +8,13 @@ public class ItemController : Interactible
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player")) {
-            print("hi");
             InventoryManager.instance.AddItem(item);
+            if (item.type == ItemType.Key) {
+                DialogController.instance.DisplayMessage("You find a key, although it looks like it has been here for hundreds of years. You wonder if it will still work.");
+            }
+            else if (item.type == ItemType.Health) {
+                DialogController.instance.DisplayMessage("You find a potion. You assume, perhaps dangerously, that you can use it to recover your health.");
+            }
             Destroy(gameObject);
         }
     }

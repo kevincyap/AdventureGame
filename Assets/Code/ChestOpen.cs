@@ -7,6 +7,8 @@ public class ChestOpen : MonoBehaviour
 
     public Animator animator;
 
+    private bool hasBeenOpened = false;
+
 
 
     // Start is called before the first frame update
@@ -22,9 +24,10 @@ public class ChestOpen : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other) {
-        print("Chest approached!");
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player") && !hasBeenOpened) {
+          DialogController.instance.DisplayMessage(" A treasure chest, the small gap between its lid and body gleaming with light. It was almost calling to you, begging you to open it. You oblige.");
           animator.SetBool("isOpen", true);
+          hasBeenOpened = true;
         }
     }
 }
