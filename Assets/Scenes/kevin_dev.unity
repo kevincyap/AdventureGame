@@ -402,6 +402,8 @@ MonoBehaviour:
   x: 0
   y: 50
   z: 0
+  xTrans: 0.3
+  xFreq: 1.5
 --- !u!136 &459215971
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -437,7 +439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 459215969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.688, y: 1.558, z: -12.626633}
+  m_LocalPosition: {x: 5.688, y: 1.82, z: -12.626633}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1603,6 +1605,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 882953563580643058, guid: 0fb5c4693e08df243a41250947ee39b1, type: 3}
+      propertyPath: xFreq
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 882953563580643058, guid: 0fb5c4693e08df243a41250947ee39b1, type: 3}
+      propertyPath: xTrans
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 882953563580643063, guid: 0fb5c4693e08df243a41250947ee39b1, type: 3}
       propertyPath: m_Name
       value: Small Potion
@@ -1659,6 +1669,14 @@ PrefabInstance:
     - target: {fileID: 6363143929957402504, guid: 1b277b8e507957b44b54177946caa334, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363143929957402506, guid: 1b277b8e507957b44b54177946caa334, type: 3}
+      propertyPath: xFreq
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363143929957402506, guid: 1b277b8e507957b44b54177946caa334, type: 3}
+      propertyPath: xTrans
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6363143929957402519, guid: 1b277b8e507957b44b54177946caa334, type: 3}
       propertyPath: m_Name
