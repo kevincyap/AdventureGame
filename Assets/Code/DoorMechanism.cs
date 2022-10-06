@@ -6,31 +6,47 @@ public class DoorMechanism : MonoBehaviour
 {
 
     public Animator animator;
-
+    public GameObject navMeshObstacle;
+    private LayerMask ItemMask;
+    public Item key;
+    public bool locked = false;
 
     // Start is called before the first frame update
     void Start()
     {
         // animator = gameObject.GetComponent<Animator>();
+        if (!locked) {
+            navMeshObstacle.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("space")) {
-            animator.SetBool("wantToOpen", true);
-            print("Animation done!!");
+    public bool Open() {
+        animator.SetBool("wantToOpen", true);
+        navMeshObstacle.SetActive(false);
+        if (locked) {
+            locked = false;
+            return true;
+        } else {
+            return false;
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        print("Hello enter");
+        if (other.gameObject.tag == "Player") {
+            if (key != null && locked) {
+                if (InventoryManager.instance.HasItem(key)) {
+                    DialogController.instance.DisplayMessage("The door opens as the key crumbles into a pile of rust.");
+                    InventoryManager.instance.RemoveItem(key);
+                    Open();
+                }
+            } else {
+                Open();
+            } 
+        }
     }
 
     private void OnTriggerStay(Collider other) {
-        print("Hello");
         // if (Input.GetKeyDown(KeyCode.E) && (other.CompareTag("Player"))) {
-          animator.SetBool("wantToOpen", true);
         // }
 
     }

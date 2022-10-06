@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
+            if (Physics.Raycast(ray, out hit, ~LayerMask.GetMask("Item"))) {
                 agent.isStopped = false;
                 agent.SetDestination(hit.point);
             }

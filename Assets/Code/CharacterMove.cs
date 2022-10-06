@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class CharacterMove : MonoBehaviour
 {
     public Camera cam;
-    public NavMeshAgent player;
     public Animator playerAnimator;
     public GameObject targetDest;
 
@@ -40,54 +39,46 @@ public class CharacterMove : MonoBehaviour
     // ============================
     // Update called once per frame
     // ============================
-    void Update()
-    {
+    // void Update()
+    // {
 
 
-        // Checking for inputs
-        print(playerAnimator.GetBool("isWalking"));
-        print(playerAnimator.GetBool("isAttacking1"));
-        print(playerAnimator.GetBool("isAttacking2"));
-        print(playerAnimator.GetBool("isAttacking3"));
+    //     // Checking for inputs
+    //     print(playerAnimator.GetBool("isWalking"));
+    //     print(playerAnimator.GetBool("isAttacking1"));
+    //     print(playerAnimator.GetBool("isAttacking2"));
+    //     print(playerAnimator.GetBool("isAttacking3"));
 
-        // Attack Key pressed
-        if (Input.GetKeyDown(KeyCode.RightControl)) {
-            isAttackPressed = true;
-        }
+    //     // Attack Key pressed
+        
 
-
-        // Jump key pressed
-        // if (Input.GetkeyDown(KeyCode.Space)) {
-        //     isJumpPressed = true;
-        // }
+    //     // Jump key pressed
+    //     // if (Input.GetkeyDown(KeyCode.Space)) {
+    //     //     isJumpPressed = true;
+    //     // }
 
 
-    }
+    // }
 
 
     // ============================
     // Physics based time step loop
     // ============================
-    private void FixedUpdate() {
+    private void Update() {
+        if (PublicVars.paused) {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.RightControl)) {
+            isAttackPressed = true;
+        }
 
-        if (Input.GetKeyDown(KeyCode.A)) {
-            prevAction = "Attack";
-        } else if (Input.GetMouseButtonDown(0)) {
-            print("Mouse clicked!");
+        if (Input.GetMouseButtonDown(0)) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            print(ray);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1f)) {
-                print("ray went to screen!!");
-                if (hit.transform.gameObject.CompareTag("Enemy") && prevAction == "Attack") {
-                    print("attack");
-                    Destroy(hit.transform.gameObject);
-                    agent.isStopped = true;
-                } else {
-                    agent.isStopped = false;
-                    agent.SetDestination(hit.point);
-                }
-                prevAction = "";
+            if (Physics.Raycast(ray, out hit)) {
+                print(hit.point);
+                agent.isStopped = false;
+                agent.SetDestination(hit.point);
             }
         }
         
@@ -106,14 +97,12 @@ public class CharacterMove : MonoBehaviour
 
         // Player movement animations
         if (!isAttacking) {
-            if (player.velocity != Vector3.zero) {
-                print("setting walk");
+            if (agent.velocity != Vector3.zero) {
                 playerAnimator.SetBool("isWalking", true);
                 // ChangeAnimationState(PLAYER_WALK);
             }
             
-            else if (player.velocity == Vector3.zero) {
-                print("setting idle");
+            else if (agent.velocity == Vector3.zero) {
                 playerAnimator.SetBool("isWalking", false);
                 // ChangeAnimationState(PLAYER_IDLE);
             }
