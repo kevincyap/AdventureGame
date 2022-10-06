@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     private GameObject playerObj;
     private Vector3 origPos;
     public string enemyName;
+    public int attackDamage = 5;
+    public int missChance = 50;
 
     public void TakeDamage(int damage) {
         health -= damage;

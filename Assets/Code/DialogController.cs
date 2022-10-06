@@ -51,7 +51,7 @@ public class DialogController : MonoBehaviour
     public void StartEncounter(EnemyController enemy) {
         player.StopPlayer();
         this.enemy = enemy;
-        SetText("You encounter a " + enemy.name);
+        SetText("You encounter a " + enemy.enemyName);
         InEncounter = true;
         enemyHealthBar.gameObject.SetActive(true);
         enemyHealthBar.SetMaxHealth(enemy.maxHealth);
@@ -66,11 +66,19 @@ public class DialogController : MonoBehaviour
         canvas.SetActive(false);
         enemyTurn = false;
     }
+
     void EnemyTurn() {
-        int damage = Random.Range(0, 5);
-        SetText("The " + enemy.enemyName + " attacks you for " + damage + " damage!");
+        int miss = Random.Range(0, 100);
+        int damage = Random.Range(1, enemy.attackDamage);
+        if (miss < enemy.missChance) {
+            SetText(enemy.enemyName + " attacks you but misses!");
+        } else {
+            SetText("The " + enemy.enemyName + " attacks you for " + damage + " damage!");
+            healthBar.TakeDamage(damage);
+        }
         healthBar.TakeDamage(damage);
     }
+
     public void Attack() {
         if (enemy == null || enemyTurn) {
             return;
@@ -87,6 +95,7 @@ public class DialogController : MonoBehaviour
         }
         SetText(text);
     }
+
     public void UseItem() {
         if (enemy != null && !enemyTurn) {
             InventoryManager.instance.SetInventory(false);
@@ -98,6 +107,7 @@ public class DialogController : MonoBehaviour
         yield return new WaitForSeconds(time);
         EndEncounter();
     }
+
     IEnumerator WaitAndEnemyTurn() {
         SetButtons(false);
         enemyTurn = true;
