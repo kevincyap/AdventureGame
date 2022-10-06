@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ReleaseFire : MonoBehaviour
 {
+    public static int Damage = 5;
+    public bool active = true;
     public AudioClip laser_sound;
     public AudioSource laser_audio;
     public GameObject projectile;

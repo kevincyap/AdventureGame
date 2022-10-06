@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     public float speed = 10f;
     public float pushAmount = 10f;
     public float timeToDie = 8f;
-    public float damage = 10f;
+    public static int Damage = 5;
     public bool counterSpawned = false;
     public Rigidbody rb;
     // Start is called before the first frame update
@@ -19,20 +19,14 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(rb);
         rb.velocity = transform.up * speed;
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            //collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * pushAmount, ForceMode.Impulse);
-            //collision.gameObject.GetComponent<CustomPlayerController>().TakeDamage(damage);
-            print("Hit!");
-        }
-        else if (collision.gameObject.CompareTag("Wall"))
-        {
+            HealthBar.instance.TakeDamage(Damage);
             Destroy(gameObject);
         }
     }

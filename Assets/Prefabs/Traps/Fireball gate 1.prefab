@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f02fcde903f6d64fa754a688682ecc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 1
   laser_sound: {fileID: 0}
   laser_audio: {fileID: 0}
   projectile: {fileID: 1223526616464650, guid: c590b17884b119046bc6412066500b7d, type: 3}

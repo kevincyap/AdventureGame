@@ -4,29 +4,33 @@ using UnityEngine;
 
 public class SpikeTrapDemo : MonoBehaviour {
 
+    public static int Damage = 5;
+
     //This script goes on the SpikeTrap prefab;
 
     public Animator spikeTrapAnim; //Animator for the SpikeTrap;
 
+    private bool active = true;
+
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         //get the Animator component from the trap;
         spikeTrapAnim = GetComponent<Animator>();
         //start opening and closing the trap for demo purposes;
-        StartCoroutine(OpenCloseTrap());
     }
-    private void OnCollisionEnter(Collision other) 
+    private void OnTriggerEnter(Collider other) 
     {
-        if(other.gameObject.tag.Equals("Player"))
+        if(other.CompareTag("Player") && active)
         {
-            Awake();
-            
+            active = false;
+            StartCoroutine(OpenCloseTrap());
         }
     }
 
     IEnumerator OpenCloseTrap()
     {
+        HealthBar.instance.TakeDamage(Damage);
         //play open animation;
         spikeTrapAnim.SetTrigger("open");
         //wait 2 seconds;
@@ -35,6 +39,7 @@ public class SpikeTrapDemo : MonoBehaviour {
         spikeTrapAnim.SetTrigger("close");
         //wait 2 seconds;
         yield return new WaitForSeconds(2);
+        active = true;
         //Do it again;
     }
 }

@@ -4774,7 +4774,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 20e729147a4dad247abfc2305c3dd963, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9599,7 +9598,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 14fab0de6c54324468738e7b38a88207, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9663,6 +9661,7 @@ GameObject:
   - component: {fileID: 199374976460404498}
   - component: {fileID: -3986991940820942492}
   - component: {fileID: 8815184942604783124}
+  - component: {fileID: 8035570747413735699}
   m_Layer: 0
   m_Name: Magic fire pro blue
   m_TagString: Untagged
@@ -14430,7 +14429,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 14fab0de6c54324468738e7b38a88207, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14496,7 +14494,6 @@ MonoBehaviour:
   speed: 10
   pushAmount: 10
   timeToDie: 8
-  damage: 10
   counterSpawned: 0
   rb: {fileID: 8815184942604783124}
 --- !u!54 &8815184942604783124
@@ -14515,6 +14512,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &8035570747413735699
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223526616464650}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.307
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1430769185673144
 GameObject:
   m_ObjectHideFlags: 0
@@ -19289,7 +19299,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 2e69c8c236ea65447a07e24d8cbed40b, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24114,7 +24123,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 14fab0de6c54324468738e7b38a88207, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
