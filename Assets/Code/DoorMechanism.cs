@@ -41,6 +41,9 @@ public class DoorMechanism : MonoBehaviour
                     InventoryManager.instance.RemoveItem(key);
                     Open();
                 }
+                else {
+                    DialogController.instance.DisplayMessage("The door is locked. There must be a key around somewhere.");
+                }
             } else {
                 DialogController.instance.DisplayMessage("This door is not locked. You push the door and enter a room.");
                 Open();

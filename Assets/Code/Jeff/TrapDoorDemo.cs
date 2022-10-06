@@ -24,6 +24,7 @@ public class TrapDoorDemo : MonoBehaviour {
             explosion.gameObject.SetActive(true);
             HealthBar.instance.TakeDamage(Damage);
             active = false;
+            DialogController.instance.DisplayMessage("You try to enter the trapdoor, but it explodes, leaving you bruised. ");
             StartCoroutine(OpenCloseTrap());
             explosion.Play();
         }

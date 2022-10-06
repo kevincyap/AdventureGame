@@ -25,6 +25,7 @@ public class SpikeTrapDemo : MonoBehaviour {
         {
             active = false;
             StartCoroutine(OpenCloseTrap());
+            DialogController.instance.DisplayMessage("You step on a trap, and... Ouch! Spikes come out of nowhere. Better be careful.");
         }
     }
 
