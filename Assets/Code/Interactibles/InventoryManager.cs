@@ -20,7 +20,15 @@ public class InventoryManager : MonoBehaviour
         items.Add(item);
     }
     public void RemoveItem(Item item) {
+        print("Removing: " + item);
+        foreach (Item i in items) {
+            print(i.itemName);
+        }
         items.Remove(item);
+        print("After removal: ");
+        foreach (Item i in items) {
+            print(i.itemName);
+        }
         ListItems();
     }
     public bool HasItem(Item item) {
@@ -72,6 +80,7 @@ public class InventoryManager : MonoBehaviour
             var itemIcon = obj.transform.Find("Icon").GetComponent<Image>();
             Button button = obj.GetComponent<Button>();
             button.onClick.AddListener(delegate { ShowItemDesc(item); });
+            print("event listener got added!!");
             itemIcon.sprite = item.sprite;
         }
     }
