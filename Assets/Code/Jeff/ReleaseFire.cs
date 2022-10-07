@@ -13,7 +13,7 @@ public class ReleaseFire : MonoBehaviour
     public LayerMask player;
     public float sphere = 20f;
     float timeLeft = 0f;
-    public float shootCD = 1f; 
+    public float shootCD = 4f; 
     // Start is called before the first frame update
 
     //This script goes on the TrapDoor prefab;
@@ -34,18 +34,19 @@ public class ReleaseFire : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (timeLeft > 0)
         {
+            print(timeLeft);
             timeLeft -= Time.deltaTime;
         }
-            if(timeLeft <= 0)
-            {
-                Awake();
-                SpawnProjectile();
-                timeLeft += shootCD;
-            }
+        if(timeLeft <= 0)
+        {
+            Awake();
+            SpawnProjectile();
+            timeLeft += shootCD;
+        }
         Collider[] colliders = Physics.OverlapSphere(transform.position, sphere, player);
         if (colliders.Length > 0) {
             target = Camera.main.gameObject;

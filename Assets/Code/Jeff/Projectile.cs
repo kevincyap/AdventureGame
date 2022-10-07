@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public float speed = 10f;
     public float pushAmount = 10f;
-    public float timeToDie = 8f;
+    public float timeToDie = 2f;
     public static int Damage = 5;
     public bool counterSpawned = false;
     public Rigidbody rb;
@@ -27,6 +27,11 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             HealthBar.instance.TakeDamage(Damage);
+            Destroy(gameObject);
+        }
+        else if(other.CompareTag("Wall"))
+        {
+            print("Wall hit!");
             Destroy(gameObject);
         }
     }
