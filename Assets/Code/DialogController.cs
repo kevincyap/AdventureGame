@@ -8,7 +8,7 @@ public class DialogController : MonoBehaviour
 {
     public bool InEncounter = false;
     TextMeshProUGUI mainText;
-    PlayerController player;
+    CharacterMove player;
     HealthBar healthBar;
     HealthBar enemyHealthBar;
     EnemyController enemy;
@@ -20,7 +20,7 @@ public class DialogController : MonoBehaviour
     {
         instance = this;
         mainText = canvas.transform.Find("MainText").GetComponent<TextMeshProUGUI>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterMove>();
         healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         enemyHealthBar = canvas.transform.Find("EnemyHealthBar").gameObject.GetComponent<HealthBar>();
     }  
@@ -76,10 +76,10 @@ public class DialogController : MonoBehaviour
             SetText("The " + enemy.enemyName + " attacks you for " + damage + " damage!");
             healthBar.TakeDamage(damage);
         }
-        healthBar.TakeDamage(damage);
     }
 
     public void Attack() {
+        player.isAttackPressed = true;
         if (enemy == null || enemyTurn) {
             return;
         }

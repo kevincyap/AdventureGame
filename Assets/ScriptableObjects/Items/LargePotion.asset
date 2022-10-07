@@ -17,4 +17,4 @@ MonoBehaviour:
   itemDesc: A larger red vial that can heal significant injuries of its user.
   type: 2
   sprite: {fileID: 21300000, guid: 136eb1fdc34103440a1aa38b4d1ab75d, type: 3}
-  data: 15
+  data: 25

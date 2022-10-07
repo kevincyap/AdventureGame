@@ -17,6 +17,13 @@ public class HealthBar : MonoBehaviour
             instance = this;
         }
     }
+
+    void Update() {
+        if (playerHealth && health <= 0) {
+            SceneController.instance.LoseGame();
+        }
+    }
+
     public void AddHealth(int diff) {
         health = Mathf.Min(PublicVars.maxHealth, health + diff);
         slider.value = health;

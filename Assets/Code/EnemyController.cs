@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public int agroDistance = 10;
+    public int agroDistance = 5;
     public int health = 10;
     public int maxHealth = 10;
-    GameObject spotLight;
+    // GameObject spotLight;
     private GameObject playerObj;
     private Vector3 origPos;
     public string enemyName;
@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
     }
     void Start() {
         playerObj = GameObject.FindGameObjectWithTag("Player");
-        spotLight = transform.Find("SpotLight").gameObject;
+        // spotLight = transform.Find("SpotLight").gameObject;
         origPos = transform.position;
     }
     // Update is called once per frame
@@ -32,8 +32,9 @@ public class EnemyController : MonoBehaviour
     {
         CheckHealth();
         if (!DialogController.instance.InEncounter) {
-            if (Vector3.Distance(playerObj.transform.position, transform.position) < 5) {
-                spotLight.SetActive(false);
+            if (Vector3.Distance(playerObj.transform.position, transform.position) < agroDistance) {
+                // spotLight.SetActive(false);
+                transform.LookAt(playerObj.transform);
                 DialogController.instance.StartEncounter(this);
             }
         }

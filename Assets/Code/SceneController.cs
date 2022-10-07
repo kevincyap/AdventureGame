@@ -8,9 +8,12 @@ public class SceneController : MonoBehaviour
     [HideInInspector]
     public static SceneController instance;
     public GameObject pauseMenu;
+    public GameObject gameOverMenu;
+    public GameObject winMenu;
     void Start()
     {
         instance = this;
+        SetPause(false);
     }
 
     public void LoadScene(string sceneName) {
@@ -32,5 +35,20 @@ public class SceneController : MonoBehaviour
     public void SetPause(bool pause) {
         PublicVars.paused = pause;
         Time.timeScale = pause ? 0 : 1;
+    }
+
+    public void RestartScene() {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void WinGame() {
+        SetPause(true);
+        winMenu.SetActive(true);
+    }
+
+    public void LoseGame() {
+        SetPause(true);
+        gameOverMenu.SetActive(true);
     }
 }

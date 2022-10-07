@@ -10,7 +10,7 @@ public class CharacterMove : MonoBehaviour
     public GameObject targetDest;
 
     // Animation clean
-    private bool isAttackPressed;
+    public bool isAttackPressed;
     private bool isAttacking;
 
 
@@ -18,14 +18,13 @@ public class CharacterMove : MonoBehaviour
     NavMeshAgent agent;
     string prevAction;
 
-    [SerializeField] private float attackDelay = 0.3f;
 
     // Animation states
     const string PLAYER_IDLE = "player_idle";
     const string PLAYER_WALK = "player_walk";
     const string PLAYER_ATTACK_1 = "player_attack_1";
     private string currentState;
-
+    public float attackDelay = 1f;
 
     // ============================
     // Start called before first frame
@@ -72,7 +71,7 @@ public class CharacterMove : MonoBehaviour
             isAttackPressed = true;
         }
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && !DialogController.instance.InEncounter) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
@@ -133,7 +132,6 @@ public class CharacterMove : MonoBehaviour
                 // ChangeAnimationState(PLAYER_ATTACK_1);
             }
 
-            attackDelay = playerAnimator.GetCurrentAnimatorStateInfo(0).length;
             Invoke("AttackComplete", attackDelay);
         }
 
@@ -156,6 +154,11 @@ public class CharacterMove : MonoBehaviour
         playerAnimator.Play(newState);
 
         currentState = newState;
+    }
+
+    
+    public void StopPlayer() {
+        agent.SetDestination(transform.position);
     }
 
 }

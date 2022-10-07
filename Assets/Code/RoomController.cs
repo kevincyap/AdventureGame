@@ -12,6 +12,7 @@ public class RoomController : MonoBehaviour
     public static float rotSpeed = 100f;
 
     private bool active = false;
+    public bool winRoom = false;
 
     void Start() {
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -26,8 +27,10 @@ public class RoomController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player") {
-            print("Active");
             active = true;
+            if (winRoom) {
+                StartCoroutine(Win());
+            }
         }
     }
 
@@ -36,5 +39,10 @@ public class RoomController : MonoBehaviour
             print("Deactivate");
             active = false;
         }
+    }
+
+    IEnumerator Win() {
+        yield return new WaitForSeconds(3f);
+        SceneController.instance.WinGame();
     }
 }
