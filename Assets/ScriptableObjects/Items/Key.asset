@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: Key
   itemDesc: A large metal key in the dungeon. Use in front of a door to unlock it.
   type: 1
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 19738c7df48efaa439d058f4d880c27d, type: 3}
   data: 0
