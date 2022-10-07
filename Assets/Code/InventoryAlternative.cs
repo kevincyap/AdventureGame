@@ -50,7 +50,7 @@ public class InventoryAlternative : MonoBehaviour
 
 
             if (item != null) {
-                inventoryManager.UseItem(item);
+                inventoryManager.UseItem();
                 print("used item!");
             }
             else {

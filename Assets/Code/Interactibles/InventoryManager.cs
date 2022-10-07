@@ -12,6 +12,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject ItemPrefab;
     public Transform ItemPanel;
     public List<Item> items = new List<Item>();
+
+    private Item selectedItem;
     void Start()
     {
         instance = this;
@@ -34,16 +36,21 @@ public class InventoryManager : MonoBehaviour
     public bool HasItem(Item item) {
         return items.Contains(item);
     }
-    public void UseItem(Item item) {
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (ItemController.UseItem(item, playerObj)) {
-            RemoveItem(item);
+    public void UseItem() {
+        if (selectedItem != null) { 
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             ItemDesc.SetActive(false);
-            DialogController.instance.UseItem();
+            if (ItemController.UseItem(selectedItem, playerObj)) {
+                RemoveItem(selectedItem);
+                selectedItem = null;
+                DialogController.instance.UseItem();
+            }
         }
+        
     }
-    public void DiscardItem(Item item) {
-        RemoveItem(item);
+    public void DiscardItem() {
+        RemoveItem(selectedItem);
+        selectedItem = null;
         ItemDesc.SetActive(false);
     }
 
@@ -52,6 +59,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void ShowItemDesc (Item item) {
+        selectedItem = item;
         var panel = ItemDesc.transform.Find("Panel").GetComponent<Image>();
         ItemDesc.SetActive(true);
         var itemName = panel.transform.Find("ItemName").GetComponent<TextMeshProUGUI>();
@@ -61,9 +69,9 @@ public class InventoryManager : MonoBehaviour
         var itemIcon = panel.transform.Find("Icon").GetComponent<Image>();
         itemIcon.sprite = item.sprite;
         Button useButton = panel.transform.Find("Use").GetComponent<Button>();
-        useButton.onClick.AddListener(delegate { UseItem(item); });
+        useButton.onClick.AddListener(delegate { UseItem(); });
         Button discardButton = panel.transform.Find("Discard").GetComponent<Button>();
-        discardButton.onClick.AddListener(delegate { DiscardItem(item); });
+        discardButton.onClick.AddListener(delegate { DiscardItem(); });
     }
 
     public void ToggleInventory() {
