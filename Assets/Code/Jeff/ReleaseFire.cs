@@ -48,6 +48,7 @@ public class ReleaseFire : MonoBehaviour
         //play open animation;
         TrapDoorAnim.SetTrigger("open");
         SpawnProjectile();
+        GetComponent<AudioSource>().PlayOneShot(laser_sound, 0.2f);
         //wait 2 seconds;
         yield return new WaitForSeconds(2);
         //play close animation;

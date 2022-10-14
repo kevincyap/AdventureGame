@@ -5,7 +5,8 @@ using UnityEngine;
 public class SpikeTrapDemo : MonoBehaviour {
 
     public static int Damage = 5;
-
+    public AudioClip spike_clip;
+    public AudioSource audioSource;
     //This script goes on the SpikeTrap prefab;
 
     public Animator spikeTrapAnim; //Animator for the SpikeTrap;
@@ -14,7 +15,7 @@ public class SpikeTrapDemo : MonoBehaviour {
 
     // Use this for initialization
     void Start()
-    {
+    {   
         //get the Animator component from the trap;
         spikeTrapAnim = GetComponent<Animator>();
         //start opening and closing the trap for demo purposes;
@@ -34,6 +35,8 @@ public class SpikeTrapDemo : MonoBehaviour {
         HealthBar.instance.TakeDamage(Damage);
         //play open animation;
         spikeTrapAnim.SetTrigger("open");
+
+        GetComponent<AudioSource>().PlayOneShot(spike_clip);
         //wait 2 seconds;
         yield return new WaitForSeconds(2);
         //play close animation;

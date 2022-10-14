@@ -8,7 +8,8 @@ public class CharacterMove : MonoBehaviour
     public Camera cam;
     public Animator playerAnimator;
     public GameObject targetDest;
-
+    public AudioClip swordatk_clip;
+    public AudioSource audioSource;
     // Animation clean
     public bool isAttackPressed;
     private bool isAttacking;
@@ -128,6 +129,7 @@ public class CharacterMove : MonoBehaviour
                 isAttacking = true;
                 int rand = Random.Range(1, 4);
                 string attackStr = "isAttacking" + rand;
+                GetComponent<AudioSource>().PlayOneShot(swordatk_clip);
                 playerAnimator.SetBool(attackStr, true);
                 // ChangeAnimationState(PLAYER_ATTACK_1);
             }
